@@ -2,15 +2,19 @@
 //Realizando llamado de header
 import Header from './components/header'
 import Guitarra from './components/guitarra'
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { db } from './data/db'
 
+  //State, los Hooks tienen que estar en la parte superior y no se puede cambiar su valor
+  //Effect si deja de hacer esto
 
 
 function App() {
 
-  //State
+  const [data,setData]= useState(db)
+  
 
-  const [auth,setAuth]= useState()
+
   
 
   return (
@@ -25,12 +29,14 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-        <Guitarra/>
-        <Guitarra/>
-        <Guitarra/>
-        <Guitarra/>
-        <Guitarra/>
-        <Guitarra/>
+          {data.map((guitarra) => {
+
+            return(<Guitarra
+                key={guitarra.id}
+                guitarra={guitarra}
+            />)
+          })}
+   
         </div>
     </main>
 
