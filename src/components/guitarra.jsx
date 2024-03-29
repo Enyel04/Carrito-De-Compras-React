@@ -1,10 +1,8 @@
-export default function Guitarra({guitarra}) {
+export default function Guitarra({guitarra,addTocart}) {
     
     const {id,name,image,description,price}=guitarra
 
-    const handleClick=(id) => {
-        console.log("Diste click",id);
-    }
+  
     return(
         <>
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
@@ -18,7 +16,7 @@ export default function Guitarra({guitarra}) {
                     <button 
                         type="button"
                         className="btn btn-dark w-100"
-                        onClick={()=>handleClick(guitarra)} //Se agrega en arrowFunction para poderlo identificar
+                        onClick={()=>addTocart(guitarra)} //Se agrega en arrowFunction para poderlo identificar, se llama el carro para tener lo anterior y agregar la guitarra
                     >Agregar al Carrito</button>
                 </div>
             </div>
