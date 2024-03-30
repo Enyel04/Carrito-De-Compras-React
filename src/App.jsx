@@ -16,14 +16,40 @@ function App() {
   
 
   function addTocart(item) {
-  setCart(preveCart=>[...preveCart,item])
+
+  const itemExists= cart.findIndex((guitarra) => guitarra.id===item.id)
+
+  if (itemExists>=0) { //Existe en el carrito
+    const updateCart = [...cart]
+    updateCart[itemExists].cantidad++
+    setCart(updateCart)
+    
+  }
+  else{
+    item.cantidad=1
+    setCart([...cart,item])
+  }
+
+
+
 }
+
+function removeFromCart(id) {
+  setCart((prevCart) =>prevCart.filter (guitarra=>guitarra.id !==id))
+    
+  
+}
+
+
   
 
   return (
     <>
   
-      <Header/>
+      <Header
+        cart={cart}
+        removeFromCart={removeFromCart}
+      />
     
       {/* Recuerda que para llamar a un componente tiene que ser en mayuscula*/}
    
