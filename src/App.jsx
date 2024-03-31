@@ -13,6 +13,9 @@ function App() {
 
   const [data,setData]= useState(db)
   const [cart,setCart]= useState([])
+
+  const MAX_ITEMS=5
+  const MIN_ITEMS=1
   
 
   function addTocart(item) {
@@ -21,13 +24,13 @@ function App() {
 
   if (itemExists>=0) { //Existe en el carrito
     const updateCart = [...cart]
-    updateCart[itemExists].cantidad++
-    setCart(updateCart)
+    updateCart[itemExists].cantidad++ //Actualiza el carrito y lo existente para luevo sumarlo
+    setCart(updateCart) //Actualiza la funcion del carrito
     
   }
   else{
-    item.cantidad=1
-    setCart([...cart,item])
+    item.cantidad=1 //procede a crear una copia exacta para irlos agregando y empezara con 1
+    setCart([...cart,item]) //Crea una copia del carrito
   }
 
 
@@ -35,9 +38,37 @@ function App() {
 }
 
 function removeFromCart(id) {
-  setCart((prevCart) =>prevCart.filter (guitarra=>guitarra.id !==id))
-    
-  
+  setCart((prevCart) =>prevCart.filter (guitarra=>guitarra.id !==id)) //Agregando setcart para eliminar carrito de compra, pasa id de guitarra para proceder a eliminarlo
+}
+
+function incrementarCantidad(id) {
+    const updateCart=cart.map(item=>{
+      if (item.id===id && item.cantidad < MAX_ITEMS) {
+        return {
+          ...item,
+          cantidad:item.cantidad+1
+        }
+      }
+      return item
+    })
+    setCart(updateCart)
+}
+function descrementarCantidad(id) {
+  const updateCart=cart.map(item=>{
+    if (item.id===id && item.cantidad > MIN_ITEMS) {
+      return {
+        ...item,
+        cantidad:item.cantidad-1
+      }
+    }
+    return item
+  })
+  setCart(updateCart)
+ 
+}
+
+function clearCart() {
+  setCart([])
 }
 
 
@@ -49,6 +80,9 @@ function removeFromCart(id) {
       <Header
         cart={cart}
         removeFromCart={removeFromCart}
+        incrementarCantidad={incrementarCantidad}
+        descrementarCantidad={descrementarCantidad}
+        clearCart={clearCart}
       />
     
       {/* Recuerda que para llamar a un componente tiene que ser en mayuscula*/}

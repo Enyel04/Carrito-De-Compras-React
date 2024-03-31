@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export default function Header({cart,removeFromCart}) {
+export default function Header({cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart}) {
 
 
     //State derivado
@@ -60,6 +60,9 @@ export default function Header({cart,removeFromCart}) {
                                                 <button
                                                     type="button"
                                                     className="btn btn-dark"
+                                                    onClick={() =>descrementarCantidad(guitarra.id) }
+                                                      
+                                                   
                                                 >
                                                     -
                                                 </button>
@@ -67,6 +70,7 @@ export default function Header({cart,removeFromCart}) {
                                                 <button
                                                     type="button"
                                                     className="btn btn-dark"
+                                                    onClick={() =>incrementarCantidad(guitarra.id) }
                                                 >
                                                     +
                                                 </button>
@@ -90,7 +94,10 @@ export default function Header({cart,removeFromCart}) {
                                 <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
                             </>
                             )} {/* Final de Operador Ternario de si carrito esta vacio*/}
-                            <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                            <button 
+                            className="btn btn-dark w-100 mt-3 p-2"
+                            onClick={clearCart}
+                            >Vaciar Carrito</button>
                         </div>
                     </div>
                 </nav>
