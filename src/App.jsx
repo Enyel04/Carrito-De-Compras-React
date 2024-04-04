@@ -14,7 +14,7 @@ import { useCart } from "./hooks/useCart"
 
 function App() {
 
-  const { data,cart,addTocart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart}=useCart()
+  const { data,cart,addTocart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}=useCart()
 
 
   
@@ -29,6 +29,8 @@ function App() {
         incrementarCantidad={incrementarCantidad}
         descrementarCantidad={descrementarCantidad}
         clearCart={clearCart}
+        isEmpty={isEmpty}
+        cartTotal={carTotal}
       />
     
       {/* Recuerda que para llamar a un componente tiene que ser en mayuscula*/}

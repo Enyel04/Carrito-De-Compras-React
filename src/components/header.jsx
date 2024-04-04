@@ -1,12 +1,13 @@
-import { useMemo } from "react";
+import { useCart } from "../hooks/useCart"
+
+
 
 export default function Header({cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart}) {
 
 
-    //State derivado
 
-    const isEmpty= useMemo(() => cart.length===0, [cart] ) //Lee si hay elementos en el carrito, de base sera 0
-    const cartTotal=useMemo(() => cart.reduce((total,item)=> total +(item.cantidad*item.price),0),[cart]) //Calculara la cantidad de guitarras (items) en el carrito y los multiplicara por el precio, luego se suma el total
+
+
     return(
              
     <>
