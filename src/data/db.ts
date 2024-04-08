@@ -1,4 +1,18 @@
-export const db = [
+
+//interface para es lo mismo, solo que sin signo del =
+// interface Guitarra {
+//     id:number
+//     name:string
+//     image:string
+//     description:string
+//     price:number
+// }
+    //se tiene que llamar los datos de db:Guitarra[] para indicar que todos los datos sera un arreglo
+import type { Guitarra } from "../types"
+
+//Estas variables se guardaron en Guitarra
+
+export const db : Guitarra[] = [
     {
         id: 1,
         name: 'Lukather',

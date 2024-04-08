@@ -1,6 +1,7 @@
 
 //Realizando llamado de header
 
+
 import Header from './components/header'
 import Guitarra from './components/guitarra'
 
@@ -16,8 +17,7 @@ function App() {
 
   const { data,cart,addTocart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}=useCart()
 
-
-  
+ //En typeScript hay que ser especifico con los datos
   
 
   return (
@@ -30,7 +30,7 @@ function App() {
         descrementarCantidad={descrementarCantidad}
         clearCart={clearCart}
         isEmpty={isEmpty}
-        cartTotal={carTotal}
+        cartTotal={cartTotal}
       />
     
       {/* Recuerda que para llamar a un componente tiene que ser en mayuscula*/}

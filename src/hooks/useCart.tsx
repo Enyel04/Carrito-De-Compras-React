@@ -2,9 +2,11 @@ import { useState, useEffect, useMemo } from "react"
 
 import { db } from "../data/db"
 
+import type { Guitarra,CartItem } from "../types"
+
 export const useCart=() => {
   
-    const carritoInicial=() => {
+    const carritoInicial=() :CartItem[] => {
         const localStorageCart=localStorage.getItem("cart")
         return localStorageCart? JSON.parse(localStorageCart): []
       }
@@ -19,35 +21,36 @@ export const useCart=() => {
       },[cart])
       
     
-      function addTocart(item) {
+      function addTocart(item : Guitarra) {
     
       const itemExists= cart.findIndex((guitarra) => guitarra.id===item.id)
     
       if (itemExists>=0 ) { //Existe en el carrito
     
         const updateCart = [...cart]
-        if (item.cantidad<MAX_ITEMS) {
+        if ( cart[itemExists].cantidad<MAX_ITEMS) {
           updateCart[itemExists].cantidad++ //Actualiza el carrito y lo existente para luevo sumarlo
-          
+          setCart(updateCart) //Actualiza la funcion del carrito
         }
-        setCart(updateCart) //Actualiza la funcion del carrito
+  
         
       }
       else{
-        item.cantidad=1 //procede a crear una copia exacta para irlos agregando y empezara con 1
-        setCart([...cart,item]) //Crea una copia del carrito
+        const NewItem: CartItem= {...item,cantidad:1}
+         //procede a crear una copia exacta para irlos agregando y empezara con 1
+        setCart([...cart,NewItem]) //Crea una copia del carrito
       }
     
     
     
     }
     
-    function removeFromCart(id) {
+    function removeFromCart(id : Guitarra["id"]) {
     
       setCart((prevCart) =>prevCart.filter (guitarra=>guitarra.id !==id)) //Agregando setcart para eliminar carrito de compra, pasa id de guitarra para proceder a eliminarlo
     }
     
-    function incrementarCantidad(id) {
+    function incrementarCantidad(id : Guitarra["id"]) {
     
         const updateCart=cart.map(item=>{
           if (item.id===id && item.cantidad < MAX_ITEMS) {
@@ -61,7 +64,7 @@ export const useCart=() => {
         setCart(updateCart)
     
     }
-    function descrementarCantidad(id) {
+    function descrementarCantidad(id: Guitarra["id"]) {
       const updateCart=cart.map(item=>{
         if (item.id===id && item.cantidad > MIN_ITEMS) {
           return {

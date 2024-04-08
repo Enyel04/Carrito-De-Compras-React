@@ -1,8 +1,19 @@
-import { useCart } from "../hooks/useCart"
+import type { CartItem,Guitarra } from "../types"
+
+type HeaderProps={
+    cart:CartItem[]
+    removeFromCart:(id:Guitarra["id"]) =>void
+    incrementarCantidad:(id:Guitarra["id"]) =>void
+    descrementarCantidad:(id:Guitarra["id"]) =>void
+    clearCart: () => void
+    isEmpty:boolean
+    cartTotal:number
 
 
 
-export default function Header({cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart}) {
+}
+
+export default function Header({cart,removeFromCart,incrementarCantidad,descrementarCantidad,clearCart,isEmpty,cartTotal}: HeaderProps) {
 
 
 
